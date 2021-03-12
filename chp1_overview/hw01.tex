@@ -1,0 +1,126 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.0cm,bottom=2.5cm}
+\usepackage{CJKutf8}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+\usepackage[longend,ruled,linesnumbered]{algorithm2e}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+
+  \title{
+    {\textbf{《算法分析与设计》第 {$1$} 次作业}
+      \footnote{要求：1、分析题请用书面化语言给出详细分析过程。}
+    }
+  }
+  \date{}
+
+  \author{
+    姓名：\underline{王骏}~~~~~~
+    学号：\underline{71119138}~~~~~~
+    成绩：\underline{~~~~~~~~~~~~~~~~~~}
+  }
+
+  \maketitle
+
+  \noindent
+  \section*{\bf \color{red}{算法分析题}}
+  \noindent
+  {\bf 题目1：}假设$f(n)$和$g(n)$是两个定义域为自然数的正函数。证明 $f(n)+g(n)=\varTheta(max(f(n),g(n)))$
+
+  \vspace{5pt}
+  \noindent
+  {\bf 答：}
+
+    If set
+    $$f(n) = \varTheta(F(n)), g(n) = \varTheta(G(n))$$ 
+    then 
+    $$\exists c_1,c_2,d_1,d_2,n_1,n_2\in N^+$$
+    when $n \geq n_1$make
+    $$c_1F(n) \leq f(n) \leq c_2F(n)$$
+    when $n \geq n_2$make
+    $$d_1G(n) \leq g(n) \leq d_2G(n)$$
+    when
+    $$n > \max(n_1,n_2)$$
+    let 
+    $$e_1 = \min(c_1,d_1), e_2 = \max(c_2,d_2)$$
+    then
+    $$ e_1 (F(n)+G(n)) \leq c_1F(n) + d_1G(n) \leq f(n) + g(n)$$
+    $$ \max(f,g) \leq \max(c_2F,d_2G) \leq c_2F + d_2G \leq e_2 (F(n)+G(n))$$
+    so 
+    $$ \frac{e_1}{e_2} \max(f,g) \leq e_1(F(n)+G(n)) \leq f(n)+g(n)$$
+    then
+    $$f(n) + g(n) \leq c_2F(n) + d_2G(n) \leq e_2(F(n)+G(n))$$ 
+    $$\max(f,g) \geq \max(c_1F,d_1G) = \frac{1}{2} \max(c_1F,d_1G) + \frac{1}{2} \max(c_1F,d_1G) \geq \frac{1}{2}c_1F + \frac{1}{2}d_1G \geq \frac{1}{2}e_1(F+G) $$
+    so
+    $$\frac{2e_2}{e_1}\max(f,g) \geq e_2(F+G) \geq f(n)+g(n)$$
+    so
+    $$\exists k_1=\frac{e_1}{e_2}, k_2=\frac{2e_2}{e_1}$$
+    when $n > \max(n_1,n_2)$
+    $$k_1\max(f,g) \leq f(n)+g(n) \leq k_2\max(f,g)$$
+    proof over \\
+
+  \vspace{10pt}
+  \noindent
+  {\bf 题目2：}假设$f(n)=\varTheta(p(n))$，$g(n)=\varTheta(q(n))$，并且都是正函数。证明以下结论：
+  \begin{enumerate}
+    \item[(a)]  $f(n)+g(n)=\varTheta(p(n)+q(n))$
+    \item[(b)]  $f(n)\times g(n)=\varTheta(p(n)\times q(n))$
+    \item[(c)]  $f(n)/g(n)=\varTheta(p(n)/q(n))$
+  \end{enumerate}
+
+  \vspace{5pt}
+  \noindent
+  {\bf 答：}
+
+    From the problem
+    $$\exists c_1,c_2,d_1,d_2 \in N^+$$
+    when $n \geq n_1$make
+    $$c_1p(n) \leq f(n) \leq c_2p(n)$$
+    when $n \geq n_2$make
+    $$d_1q(n) \leq g(n) \leq d_2q(n)$$
+    when
+    $$n > \max(n_1,n_2)$$
+    $$\exists e_1 = \min(c_1,d_1), e_2 = \max(c_2,d_2)$$
+    make
+    $$e_1(f+g) \leq c_1p + d_1q \leq f+g \leq c_2p + d_2q \leq e_2(f+g)$$
+    proof (a) over
+    $$\exists k_1 = c_1d_1, k_2 = c_2d_2$$
+    make
+    $$k_1pq = c_1d_1pq \leq fg \leq c_2d_2pq \leq k_2pq$$
+    proof (b) over
+    $$\exists r_1 = \frac{c_1}{d_1}, r_2 = \frac{c_2}{d_2}$$
+    make
+    $$r_1p/q = \frac{c_1p}{d_1q} \leq \frac{f(n)}{g(n)} \leq \frac{c_2p}{d_2q} = r_2p/q$$
+    proof (c) over
+
+
+  \vspace{10pt}
+  \noindent
+  {\bf 题目3：}平均情况下的计算时间复杂性\par
+  证明：如果一个算法在平均情况下的计算时间复杂性为$\theta(f(n))$，则该算法在最坏情况下所需的计算时间为$\Omega(f(n))$。
+
+  \vspace{5pt}
+  \noindent
+  {\bf 答：}
+
+  For $T_{avg}(n) = \varTheta{f(n)}$
+  $$\exists n_0,c_1,c_2 \in N^+$$
+  make
+  $$c_1f(n) \leq T_{avg}(n) \leq c_2f(n)$$
+  so 
+  $$T_{max}(n) \geq T_{avg}(n) \geq c_1f(n)$$
+  so 
+  $$T_{max}(n) = \Omega{f(n)}$$
+  proof over
+
+
+\end{CJK*}
+\end{document} 
