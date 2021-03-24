@@ -21,6 +21,6 @@ int main(void) {
   for (int i = 0; i < 100; i++)
     arr[i] = rand() % 100;
   sort(arr, arr + sizeof(arr) / sizeof(arr[0]));
-  cout << binarySearch(arr, 0, 99, 21); 
+  cout << binarySearch(arr, 0, 99, 23); 
   return 0;
 }
