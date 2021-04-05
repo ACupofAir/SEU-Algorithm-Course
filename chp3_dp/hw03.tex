@@ -11,6 +11,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{graphicx}
+\graphicspath{ {./img/} }
 
 \begin{document}
 \begin{CJK*}{UTF8}{gbsn}
@@ -42,6 +43,18 @@
 	\noindent
 	{\bf 答：}
 
+	(a)
+
+	$$
+	m[i,j]= \left\{\begin{array}{lcl}
+		\min\limits_{i \leq k<j} \{m[i][k] + m[k+1][j] + p_{i-1}p_kp_j\} & \mbox{for} & i < j \\
+		0 & \mbox{for} & i=j
+	\end{array}\right
+	$$
+
+	(b)
+
+  \includegraphics[width=15cm]{img/answ1.jpg}
 
 	\vspace{10pt}
 	\noindent
@@ -61,6 +74,27 @@
 	\noindent
 	{\bf 答：}
 
+	(a)
+	\begin{itemize}
+		\item Algorithm
+	$$
+	C[i,j]= \left\{\begin{array}{lcl}
+			\min\limits_{i \leq k<j} \{C[i][k] + C[k][j] + p(a_j - a_i)\} & \mbox{for} & i < j + 1 \\
+		0 & \mbox{for} & j=i+1
+	\end{array}\right
+	$$
+	\item 算法步骤与矩阵连乘一样，斜向列表，并记录每个k到s[i][j], 再通过k逆向切割管子 
+  \item 复杂度同矩阵连乘: \mathcal{O}(n^3) 
+
+\end{itemize} (b) 
+
+Flow:
+
+\includegraphics[width=15cm]{img/answ2.jpg}
+
+	Result:
+
+  \includegraphics[width=15cm]{img/answ2_2.jpg}
 
 	\vspace{10pt}
 	\noindent
@@ -78,5 +112,24 @@
 	\noindent
 	{\bf 答：}
 
+	(a) Algorithm:
+
+	\begin{itemize}
+		\item 记M[i][j] = 1 表示 Z[1, i+j] 是X[i], Y[j] 的洗牌
+		\item 递归公式 $$
+			Z[i+j] = \left\{\begin{array}{lcl}
+					X[i] & \Rightarrow & M[i-1][j] = 1\\
+					Y[j] & \Rightarrow & M[i][j-1] = 1\\
+					not Equal Either& \Rightarrow & M[i,j] = 0
+				\end{array}
+				$$
+			\item M[0][0] = 0
+		\end{itemize}
+
+  (b) 
+
+  \includegraphics[width=12cm]{img/answ3.jpg}
+
+	所以是一个洗牌
 \end{CJK*}
 \end{document} 
